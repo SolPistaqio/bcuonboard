@@ -1,6 +1,7 @@
 <template>
   <v-container class="fill-height">
     <v-row justify="center">
+      <h1>Welcome to Blockchain Cuties Universe Onboarding!</h1>
       <v-col>
         <v-card>
           <v-row justify="center">
@@ -23,7 +24,9 @@
           </v-row>
           <v-card-actions>
             <v-row justify="center" class="pa-5">
-              <v-btn outlined color="primary"> Get started </v-btn>
+              <v-btn outlined color="primary" to="/journey">
+                Get started
+              </v-btn>
             </v-row>
           </v-card-actions></v-card
         >
