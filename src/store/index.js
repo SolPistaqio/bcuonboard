@@ -8,6 +8,7 @@ export default new Vuex.Store({
     chosenPetKind: null,
     chosenBlockchain: null,
     chosenStategy: null,
+    currentStep: 1,
     petKinds: [
       { name: "Cat", info: "Luck +4%", value: "cat" },
       { name: "Dog", info: "Defence +2", value: "dog" },
@@ -136,7 +137,14 @@ export default new Vuex.Store({
       },
     ],
   },
-  mutations: {},
+  mutations: {
+    nextStep(state) {
+      state.currentStep++;
+    },
+    updatechosenBlockchain(state, blockchain) {
+      state.chosenBlockchain = blockchain;
+    },
+  },
   actions: {},
   modules: {},
 });

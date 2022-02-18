@@ -14,7 +14,7 @@
           <v-row no-gutters class="align-center">
             <v-col cols="2" class="pr-n4">
               <v-img
-                :src="'/assets/' + pet.value + '.png'"
+                :src="'/pictures/' + pet.value + '.png'"
                 height="40"
                 width="40"
                 aspect-ratio="1"

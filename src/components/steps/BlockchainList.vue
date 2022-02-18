@@ -60,8 +60,11 @@
                 primary
                 >Back</v-btn
               >
-
-              <v-btn :disabled="walletInstalled === false" color="primary"
+              <v-spacer></v-spacer>
+              <v-btn
+                :disabled="!walletInstalled"
+                color="primary"
+                @click="finishBlockchainChioce"
                 >Continue</v-btn
               >
             </v-card-actions>
@@ -74,6 +77,7 @@
 
 <script>
 import BlockchainCard from "../display/BlockchainCard.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "Blockchains",
@@ -85,103 +89,13 @@ export default {
     chosenBlockchain: {},
     userMadeAChoice: false,
     walletInstalled: false,
-    blockchains: [
-      {
-        name: "EOS",
-        desktopLink: "https://getwombat.io",
-        mobileLink: "https://getwombat.io",
-        walletName: "Wombat Wallet",
-        logo: "EOSicon",
-        properties: {
-          nfts: "160K+",
-          nftMarket: 4,
-          itemMarket: 4,
-          breeding: 3,
-          transactions: 4,
-        },
-      },
-      {
-        name: "TRON",
-        desktopLink: "https://www.tronlink.org",
-        mobileLink: "https://www.tronlink.org",
-        walletName: "TRON Link Wallet",
-        logo: "TRONicon",
-        properties: {
-          nfts: "190K+",
-          nftMarket: 5,
-          itemMarket: 5,
-          breeding: 3,
-          transactions: 4,
-        },
-      },
-      {
-        name: "NEO",
-        desktopLink: "https://o3.network/#/wallet",
-        mobileLink: "https://o3.network/#/wallet",
-        logo: "NEOicon",
-        walletName: "O3 Wallet",
-        properties: {
-          nfts: "20K+",
-          nftMarket: 2,
-          itemMarket: 3,
-          breeding: 4,
-          transactions: 4,
-        },
-      },
-      {
-        name: "Polygon",
-        desktopLink: "https://metamask.io",
-        mobileLink: "https://trustwallet.com",
-        logo: "MATICicon",
-        walletName: "Metamask Wallet",
-        properties: {
-          nfts: "8K+",
-          nftMarket: 3,
-          itemMarket: 4,
-          breeding: 4,
-          transactions: 4,
-        },
-      },
-      {
-        name: "HECO",
-        desktopLink: "https://metamask.io",
-        mobileLink: "https://www.huobiwallet.io/en",
-        logo: "HECOicon",
-        walletName: "Metamask Wallet",
-        properties: {
-          nfts: "10K+",
-          nftMarket: 1,
-          itemMarket: 1,
-          breeding: 4,
-          transactions: 4,
-        },
-      },
-      {
-        name: "Ethereum",
-        desktopLink: "https://metamask.io",
-        mobileLink: "https://trustwallet.com",
-        logo: "ETHicon",
-        walletName: "Metamask Wallet",
-        properties: {
-          nfts: "130K+",
-          nftMarket: 1,
-          itemMarket: 1,
-          breeding: 1,
-          transactions: 1,
-        },
-      },
-    ],
   }),
+  computed: mapState(["blockchains"]),
+  methods: {
+    finishBlockchainChioce() {
+      this.$store.commit("updatechosenBlockchain", this.chosenBlockchain.name);
+      this.$store.commit("nextStep");
+    },
+  },
 };
 </script>
-
-<style>
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 1;
-  position: absolute;
-  width: 100%;
-}
-</style>

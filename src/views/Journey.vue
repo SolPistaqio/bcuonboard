@@ -17,20 +17,7 @@
           <blockchain-list></blockchain-list>
         </v-stepper-content>
         <v-stepper-content step="2">
-          <v-card>
-            <v-card-title> Time to set up your player profile! </v-card-title>
-            <v-card-actions>
-              <v-row justify="center" class="pa-5">
-                <v-btn outlined color="primary">Log In</v-btn>
-                <v-btn outlined color="primary" @click="model = 4"
-                  >Continue</v-btn
-                >
-              </v-row>
-            </v-card-actions>
-            <v-card-subtitle>
-              Come back to this page to choose your first pet
-            </v-card-subtitle>
-          </v-card>
+          <profile-setup></profile-setup>
         </v-stepper-content>
         <v-stepper-content step="3">
           <v-row justify="space-around">
@@ -43,6 +30,7 @@
 </template>
 
 <script>
+import ProfileSetup from "../components/steps/ProfileSetup.vue";
 import BlockchainList from "/src/components/steps/BlockchainList.vue";
 import StrategyForm from "/src/components/steps/StrategyForm.vue";
 export default {
@@ -50,10 +38,10 @@ export default {
   components: {
     BlockchainList,
     StrategyForm,
+    ProfileSetup,
   },
 
   data: () => ({
-    model: 1,
     steps: [
       {
         name: " Pick your blockchain",
@@ -75,6 +63,11 @@ export default {
       },
     ],
   }),
+  computed: {
+    model() {
+      return this.$store.state.currentStep;
+    },
+  },
 };
 </script>
 <style></style>
