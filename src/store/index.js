@@ -27,27 +27,27 @@ export default new Vuex.Store({
       {
         name: "basic",
         info: "I want to get a basic pet to explore the game",
-        value: "params",
+        value: "sortBy=Price&orderBy=Asc",
       },
       {
         name: "strong",
         info: "I want the best warrior I can get",
-        value: "params1",
+        value: "generation=0&nobility=Noble&level%5Bmin%5D=5&level%5Bmax%5D=12",
       },
       {
         name: "collectible",
         info: "I want a unique collectible pet",
-        value: "params2",
+        value: "https://blockchaincuties.com/pets_unique",
       },
       {
         name: "tribute",
         info: "I want a pet inspired by pop culture",
-        value: "params3",
+        value: "rarity=Fancy",
       },
       {
         name: "random",
         info: "I don't have anything specific in mind",
-        value: "params4",
+        value: "sortBy=AdventureCooldown",
       },
     ],
     blockchains: [
@@ -76,7 +76,7 @@ export default new Vuex.Store({
           nftMarket: 5,
           itemMarket: 5,
           breeding: 3,
-          transactions: 4,
+          transactions: 5,
         },
       },
       {
@@ -104,7 +104,7 @@ export default new Vuex.Store({
           nftMarket: 3,
           itemMarket: 4,
           breeding: 4,
-          transactions: 4,
+          transactions: 5,
         },
       },
       {

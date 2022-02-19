@@ -1,111 +1,115 @@
 <template>
-  <v-form>
-    <h2>Let’s talk about pet kinds!</h2>
-    <p>Which one sounds best?</p>
-
-    <v-radio-group v-model="kind">
-      <v-radio
-        v-for="pet in petKinds"
-        :key="pet.value"
-        :value="pet.value"
-        required
-      >
-        <template v-slot:label>
-          <v-row no-gutters class="align-center">
-            <v-col cols="2" class="pr-n4">
-              <v-img
-                :src="'/pictures/' + pet.value + '.png'"
-                height="40"
-                width="40"
-                aspect-ratio="1"
-                contain
-              ></v-img>
-            </v-col>
-            <v-col cols="9">
-              <span class="font-weight-bold">{{ pet.name }}</span> -
-              {{ pet.info }}
-            </v-col>
+  <v-container class="fill-height">
+    <v-card flat>
+      <v-card-title> Let’s talk about pet kinds! </v-card-title>
+      <v-card-subtitle>Which one sounds best?</v-card-subtitle>
+      <v-card-text>
+        <v-form>
+          <v-radio-group v-model="kind">
+            <v-row>
+              <v-col cols="6" v-for="pet in petKinds" :key="pet.value">
+                <v-radio :value="pet" required>
+                  <template v-slot:label>
+                    <v-row no-gutters class="align-center">
+                      <v-col cols="1" class="pr-n4">
+                        <v-img
+                          :src="'/pictures/' + pet.value + '.png'"
+                          height="40"
+                          width="40"
+                          aspect-ratio="1"
+                          contain
+                        ></v-img>
+                      </v-col>
+                      <v-col cols="9">
+                        <span class="font-weight-bold ml-3">{{
+                          pet.name
+                        }}</span>
+                        -
+                        {{ pet.info }}
+                      </v-col>
+                    </v-row>
+                  </template>
+                </v-radio>
+              </v-col>
+            </v-row>
+          </v-radio-group>
+          <div v-if="kind">
+            <v-card-title
+              >You chose a {{ kind.value }}! {{ goodVibe }} Now, let’s talk
+              about your strategy.</v-card-title
+            >
+            <v-row>
+              <v-col cols="6">
+                <v-radio-group v-model="strategy">
+                  <v-radio
+                    v-for="strategy in strategies"
+                    :key="strategy.name"
+                    :label="strategy.info"
+                    :value="strategy.value"
+                    required
+                  ></v-radio>
+                </v-radio-group>
+              </v-col>
+              <v-col cols="6">
+                <v-img
+                  src="/pictures/think.png"
+                  max-height="300"
+                  contain
+                ></v-img
+              ></v-col>
+            </v-row>
+          </div>
+        </v-form>
+      </v-card-text>
+      <div v-if="strategy && kind">
+        <v-card-actions>
+          <v-row justify="center">
+            <v-btn class="pa-5"> Pick my first pet </v-btn>
           </v-row>
-        </template>
-      </v-radio>
-    </v-radio-group>
-
-    <!-- <div v-for="pet in petKinds" :key="pet.value">
-      <input type="radio" :id="pet.value" :value="pet.value" v-model="kind" />
-      <label :for="pet.value"
-        ><span class="font-weight-bold">{{ pet.name }}</span> -
-        {{ pet.info }}</label
-      >
-    </div> -->
-
-    <p>You chose a {{ kind }}! Nice!</p>
-    <h2>Now, let’s talk strategy!</h2>
-    <v-radio-group v-model="strategy">
-      <v-radio
-        v-for="strategy in strategies"
-        :key="strategy.name"
-        :label="strategy.info"
-        :value="strategy.value"
-        required
-      ></v-radio>
-    </v-radio-group>
-    <v-btn class="pa-5" type="submit"> Pick my first pet </v-btn>
-  </v-form>
+        </v-card-actions>
+        <v-card-subtitle>
+          <v-row justify="center" class="pa-3">
+            Return to this page to find out what you can do next
+          </v-row>
+        </v-card-subtitle>
+      </div>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-// pass blockchain as props or add it to state.
-// import { mapState } from "vuex";
+import { mapState } from "vuex";
+
 export default {
   data: () => ({
     kind: null,
     strategy: null,
-    petKinds: [
-      { name: "Cat", info: "Luck +4%", value: "cat" },
-      { name: "Dog", info: "Defence +2", value: "dog" },
-      { name: "Fox", info: "Evasion +4%", value: "fox" },
-      { name: "Lizard", info: "Attack +1, Defence +1", value: "lizard" },
-      { name: "Bear", info: "Attack +2", value: "bear" },
-      { name: "Pig", info: "Luck +2%, Drop Chance +15%", value: "pig" },
-      {
-        name: "Hedgehog",
-        info: "Attack +1%, Drop Chance +15%",
-        value: "hedgehog",
-      },
-      { name: "Rabbit", info: "Luck +2%, Evasion +2%", value: "rabbit" },
-    ],
-    strategies: [
-      {
-        name: "basic",
-        info: "I want to get a basic pet to explore the game",
-        value: "params",
-      },
-      {
-        name: "strong",
-        info: "I want the best warrior I can get",
-        value: "params1",
-      },
-      {
-        name: "collectible",
-        info: "I want a unique collectible pet",
-        value: "params2",
-      },
-      {
-        name: "tribute",
-        info: "I want a pet inspired by pop culture",
-        value: "params3",
-      },
-      {
-        name: "random",
-        info: "I don't have anything specific in mind",
-        value: "params4",
-      },
-    ],
+    goodVibe: null,
   }),
+  watch: {
+    kind: function () {
+      this.goodVibe = this.goodVibesGenerator();
+    },
+  },
 
-  // computed: {
-  //   ...mapState(["petKinds"]),
-  // },
+  computed: mapState(["petKinds", "strategies"]),
+  methods: {
+    goodVibesGenerator() {
+      const goodVibes = [
+        "Nice!",
+        "Perfect!",
+        "Good choice!",
+        "Awesome!",
+        "Great!",
+        "Delightful!",
+        "Terrific!",
+        "Wonderful!",
+        "Brilliant!",
+      ];
+      const randomNumber = Math.floor(Math.random() * goodVibes.length);
+      return goodVibes[randomNumber];
+    },
+  },
 };
 </script>
 

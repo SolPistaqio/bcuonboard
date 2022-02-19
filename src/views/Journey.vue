@@ -13,16 +13,12 @@
       </v-stepper-header>
 
       <v-stepper-items>
-        <v-stepper-content step="1">
-          <blockchain-list></blockchain-list>
-        </v-stepper-content>
-        <v-stepper-content step="2">
-          <profile-setup></profile-setup>
-        </v-stepper-content>
-        <v-stepper-content step="3">
-          <v-row justify="space-around">
-            <strategy-form></strategy-form>
-          </v-row>
+        <v-stepper-content
+          v-for="step in steps"
+          :key="step.order"
+          :step="step.order"
+        >
+          <component :is="step.component" />
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -33,12 +29,14 @@
 import ProfileSetup from "../components/steps/ProfileSetup.vue";
 import BlockchainList from "/src/components/steps/BlockchainList.vue";
 import StrategyForm from "/src/components/steps/StrategyForm.vue";
+import Subscription from "/src/components/steps/Subscription.vue";
 export default {
   name: "Welcome",
   components: {
     BlockchainList,
     StrategyForm,
     ProfileSetup,
+    Subscription,
   },
 
   data: () => ({
@@ -51,6 +49,7 @@ export default {
       {
         name: "Set up player profile",
         order: 2,
+        component: "ProfileSetup",
       },
       {
         name: "Pick your first pet",
@@ -60,6 +59,7 @@ export default {
       {
         name: "Continue mastering BCU",
         order: 4,
+        component: "Subscription",
       },
     ],
   }),

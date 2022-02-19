@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import WelcomeCard from "../components/WelcomeCard";
+import WelcomeCard from "../components/display/WelcomeCard";
 
 export default {
   name: "Welcome",
