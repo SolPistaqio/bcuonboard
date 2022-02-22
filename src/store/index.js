@@ -5,9 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    chosenPetKind: null,
     chosenBlockchain: null,
-    chosenStategy: null,
     currentStep: 1,
     petKinds: [
       { name: "Cat", info: "Luck +4%", value: "cat" },
@@ -27,27 +25,27 @@ export default new Vuex.Store({
       {
         name: "basic",
         info: "I want to get a basic pet to explore the game",
-        value: "sortBy=Price&orderBy=Asc",
+        value: "&sortBy=Price&orderBy=Asc",
       },
       {
         name: "strong",
         info: "I want the best warrior I can get",
-        value: "generation=0&nobility=Noble&level%5Bmin%5D=5&level%5Bmax%5D=12",
+        value: "Noble",
       },
       {
         name: "collectible",
         info: "I want a unique collectible pet",
-        value: "https://blockchaincuties.com/pets_unique",
+        value: "pets_unique",
       },
       {
         name: "tribute",
         info: "I want a pet inspired by pop culture",
-        value: "rarity=Fancy",
+        value: "&rarity=Fancy",
       },
       {
         name: "random",
         info: "I don't have anything specific in mind",
-        value: "sortBy=AdventureCooldown",
+        value: "&sortBy=AdventureCooldown",
       },
     ],
     blockchains: [

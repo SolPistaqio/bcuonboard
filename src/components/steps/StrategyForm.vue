@@ -64,10 +64,25 @@
       <div v-if="strategy && kind">
         <v-card-actions>
           <v-row justify="center">
-            <v-btn class="pa-5"> Pick my first pet </v-btn>
+            <v-btn
+              v-if="!marketVisited"
+              class="pa-5"
+              :href="link"
+              target="_blank"
+              @click="marketVisited = true"
+            >
+              Pick my first pet
+            </v-btn>
+            <div v-if="marketVisited">
+              <v-btn class="pa-5 mr-10" :href="link" target="_blank">
+                Pick my next pet
+              </v-btn>
+
+              <v-btn class="pa-5" @click="toFinalStep"> Continue </v-btn>
+            </div>
           </v-row>
         </v-card-actions>
-        <v-card-subtitle>
+        <v-card-subtitle v-if="!marketVisited">
           <v-row justify="center" class="pa-3">
             Return to this page to find out what you can do next
           </v-row>
@@ -85,14 +100,45 @@ export default {
     kind: null,
     strategy: null,
     goodVibe: null,
+    marketVisited: false,
   }),
+  computed: {
+    link: function () {
+      if (this.strategy && this.kind) {
+        switch (this.strategy) {
+          case "pets_unique":
+            return "https://blockchaincuties.com/pets_unique";
+          case "Noble":
+            return (
+              "https://blockchaincuties.com/pets_sell?kind=" +
+              this.kind.name +
+              "&blockchain=" +
+              this.$store.state.chosenBlockchain +
+              "&nobility=Noble&level%5Bmin%5D=5&level%5Bmax%5D=12&page=1&sortBy=AdventureCooldown&orderBy=Asc&auctionType%5B0%5D=Sell&showGroups=true"
+            );
+          default:
+            return (
+              "https://blockchaincuties.com/pets_sell?kind=" +
+              this.kind.name +
+              "&blockchain=" +
+              this.$store.state.chosenBlockchain +
+              "&level%5Bmin%5D=1&level%5Bmax%5D=12&page=1" +
+              this.strategy +
+              "&auctionType%5B0%5D=Sell&showGroups=true"
+            );
+        }
+      } else {
+        return null;
+      }
+    },
+    ...mapState(["petKinds", "strategies"]),
+  },
   watch: {
     kind: function () {
       this.goodVibe = this.goodVibesGenerator();
     },
   },
 
-  computed: mapState(["petKinds", "strategies"]),
   methods: {
     goodVibesGenerator() {
       const goodVibes = [
@@ -108,6 +154,9 @@ export default {
       ];
       const randomNumber = Math.floor(Math.random() * goodVibes.length);
       return goodVibes[randomNumber];
+    },
+    toFinalStep() {
+      this.$store.commit("nextStep");
     },
   },
 };

@@ -82,7 +82,7 @@ import HECOicon from "/src/components/icons/HECO.vue";
 import MATICicon from "/src/components/icons/MATIC.vue";
 
 export default {
-  name: "Blockchain Card",
+  name: "BlockchainCard",
   props: {
     blockchain: Object,
     nonActive: Boolean,
