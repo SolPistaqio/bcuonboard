@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="8">
       <v-text-field
-        prepend-inner-icon="mdi-at"
+        prepend-inner-icon="mdi-email"
         type="email"
         :rules="emailRules"
         placeholder="email"

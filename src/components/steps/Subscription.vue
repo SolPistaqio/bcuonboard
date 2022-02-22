@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height">
+    <!-- Add back button and wiki link -->
     <v-card flat>
       <v-card-title>
         Congratulations on starting your Cutie collection!

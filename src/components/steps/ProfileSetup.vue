@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height">
+    <!-- Add more details since you know which blockchain and wallet it will be -->
     <v-card v-if="!loggedIn">
       <v-card-title> Time to set up your player profile! </v-card-title>
       <v-card-text>

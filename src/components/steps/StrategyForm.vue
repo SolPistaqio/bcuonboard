@@ -88,6 +88,7 @@
           </v-row>
         </v-card-subtitle>
       </div>
+      <!-- Warn about what happens next -->
     </v-card>
   </v-container>
 </template>
