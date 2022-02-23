@@ -7,6 +7,31 @@ export default new Vuex.Store({
   state: {
     chosenBlockchain: null,
     currentStep: 1,
+
+    // data for the app starts here
+
+    steps: [
+      {
+        name: "Pick your blockchain",
+        order: 1,
+        path: "/journey/blockchain",
+      },
+      {
+        name: "Set up player profile",
+        order: 2,
+        path: "/journey/profile",
+      },
+      {
+        name: "Pick your first pet",
+        order: 3,
+        path: "/journey/strategy",
+      },
+      {
+        name: "Continue mastering BCU",
+        order: 4,
+        path: "/journey/mastery",
+      },
+    ],
     petKinds: [
       { name: "Cat", info: "Luck +4%", value: "cat" },
       { name: "Dog", info: "Defence +2", value: "dog" },

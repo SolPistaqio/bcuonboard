@@ -24,7 +24,7 @@
       </v-row>
       <v-card-actions>
         <v-row justify="center" class="pa-5">
-          <v-btn outlined color="primary" to="/journey"> Get started </v-btn>
+          <v-btn color="primary" to="/journey/blockchain"> Get started </v-btn>
         </v-row>
       </v-card-actions></v-card
     >
