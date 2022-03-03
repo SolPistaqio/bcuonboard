@@ -57,7 +57,6 @@
                   walletInstalled = false;
                 "
                 class="mr-5 ml-1"
-                primary
                 >Back</v-btn
               >
               <v-spacer></v-spacer>
@@ -94,6 +93,10 @@ export default {
   methods: {
     finishBlockchainChioce() {
       this.$store.commit("updatechosenBlockchain", this.chosenBlockchain.name);
+      this.$store.commit(
+        "updatechosenWallet",
+        this.chosenBlockchain.walletName
+      );
       this.$store.commit("nextStep");
     },
   },

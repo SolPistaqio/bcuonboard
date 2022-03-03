@@ -1,5 +1,8 @@
 <template>
-  <v-row>
+  <v-row v-if="!subscribed">
+    <h3 class="text-bold">
+      Subscribe for daily tips to help you along the way!
+    </h3>
     <v-col cols="8">
       <v-text-field
         prepend-inner-icon="mdi-email"
@@ -10,11 +13,20 @@
         hint="No spam. Unsubscribe at any time."
         persistent-hint
         outlined
-        autofocus
       >
       </v-text-field> </v-col
-    ><v-col class="pt-5">
-      <v-btn @click="subscribe()">Subcribe</v-btn>
+    ><v-col class="pt-4">
+      <v-btn @click="subscribe()" color="primary" large>Subscribe</v-btn>
+    </v-col>
+  </v-row>
+  <v-row v-else>
+    <v-col>
+      <h3 class="text-bold mb-3">Thank you for subscribing!</h3>
+      <p>Check your mailbox to confirm your subscription.</p>
+      <p>
+        If you can't find the confirmation email, check your junk folder and add
+        social@blockchaincuties.com to your contacts.
+      </p>
     </v-col>
   </v-row>
 </template>

@@ -33,8 +33,8 @@
               </v-col>
             </v-row>
           </v-radio-group>
-          <div v-if="kind">
-            <v-card-title
+          <div v-if="kind || marketVisited">
+            <v-card-title v-if="kind && !marketVisited"
               >You chose a {{ kind.value }}! {{ goodVibe }} Now, let’s talk
               about your strategy.</v-card-title
             >
@@ -61,24 +61,37 @@
           </div>
         </v-form>
       </v-card-text>
-      <div v-if="strategy && kind">
+      <div v-if="(strategy && kind) || marketVisited">
         <v-card-actions>
           <v-row justify="center">
             <v-btn
               v-if="!marketVisited"
+              color="primary"
               class="pa-5"
               :href="link"
               target="_blank"
-              @click="marketVisited = true"
+              @click="
+                marketVisited = true;
+                kind = null;
+                strategy = null;
+              "
             >
               Pick my first pet
             </v-btn>
             <div v-if="marketVisited">
-              <v-btn class="pa-5 mr-10" :href="link" target="_blank">
+              <v-btn
+                class="pa-5 mr-10"
+                :href="link"
+                target="_blank"
+                color="primary"
+                :disabled="!kind || !strategy"
+              >
                 Pick my next pet
               </v-btn>
 
-              <v-btn class="pa-5" @click="toFinalStep"> Continue </v-btn>
+              <v-btn class="pa-5" @click="toFinalStep" color="primary">
+                Continue
+              </v-btn>
             </div>
           </v-row>
         </v-card-actions>

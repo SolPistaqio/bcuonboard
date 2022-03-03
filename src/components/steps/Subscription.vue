@@ -1,6 +1,10 @@
 <template>
   <v-container class="fill-height">
-    <!-- Add back button and wiki link -->
+    <!-- Add back button and wiki link
+    Need a play now button
+    
+     -->
+
     <v-card flat>
       <v-card-title>
         Congratulations on starting your Cutie collection!
@@ -22,9 +26,6 @@
               There's still a lot to figure out before you find your strategy.
               And you don't have to do it alone.
             </p>
-            <h3 class="text-bold">
-              Subscribe for daily tips to help you along the way!
-            </h3>
 
             <v-card-actions>
               <SubscriptionCard />

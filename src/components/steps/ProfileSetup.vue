@@ -1,6 +1,5 @@
 <template>
   <v-container class="fill-height">
-    <!-- Add more details since you know which blockchain and wallet it will be -->
     <v-card v-if="!loggedIn">
       <v-card-title> Time to set up your player profile! </v-card-title>
       <v-card-text>
@@ -8,14 +7,16 @@
           <v-col cols="6">
             <ol>
               <li>Navigate to BCU login page</li>
-              <li>Find blockchain you chose on the left</li>
-              <li>Click on wallet</li>
+              <li>
+                Find {{ this.$store.state.chosenBlockchain }} blockchain on the
+                left
+              </li>
+              <li>Click on {{ this.$store.state.chosenWallet }}</li>
               <li>Come back to this page to choose your first pet</li>
             </ol>
             <v-card-actions>
               <v-row justify="center" class="pa-5">
                 <v-btn
-                  outlined
                   color="primary"
                   href="https://blockchaincuties.com/login"
                   target="_blank"
@@ -43,8 +44,6 @@
 
             <v-card-actions>
               <v-btn
-                outlined
-                color="primary"
                 @click="
                   loggedIn = false;
                   loginConfirmed = false;
@@ -54,7 +53,6 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn
-                outlined
                 color="primary"
                 @click="finishProfileSetup"
                 :disabled="!loginConfirmed"

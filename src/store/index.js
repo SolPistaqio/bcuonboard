@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     chosenBlockchain: null,
+    chosenWallet: null,
     currentStep: 1,
 
     // data for the app starts here
@@ -166,6 +167,9 @@ export default new Vuex.Store({
     },
     updatechosenBlockchain(state, blockchain) {
       state.chosenBlockchain = blockchain;
+    },
+    updatechosenWallet(state, wallet) {
+      state.chosenWallet = wallet;
     },
   },
   actions: {},
