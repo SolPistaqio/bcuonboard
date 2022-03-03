@@ -52,7 +52,7 @@ router.beforeEach((to, from, next) => {
     )[0];
 
     if (destinationStep.order > store.state.currentStep) {
-      next(store.state.steps[store.state.currentStep - 1].path);
+      next("/");
     } else {
       next();
     }
