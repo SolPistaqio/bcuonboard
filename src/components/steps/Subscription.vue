@@ -1,7 +1,8 @@
 <template>
   <v-container class="fill-height">
-    <!-- Add back button and wiki link
+    <!-- 
     Need a play now button
+    
     
      -->
 
@@ -19,8 +20,8 @@
               </v-col>
             </v-row>
             <p class="mt-5">
-              Now you have a game account in one of the most advanced
-              Play-To-Earn games in the industry.
+              Now you have an account in one of the most advanced Play-To-Earn
+              games in the industry.
             </p>
             <p>
               There's still a lot to figure out before you find your strategy.

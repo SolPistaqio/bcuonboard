@@ -21,7 +21,10 @@
                   href="https://blockchaincuties.com/login"
                   target="_blank"
                   @click="loggedIn = true"
-                  >Log In Now</v-btn
+                  >Log In Now
+                  <v-icon small class="mt-n4 mx-auto">
+                    mdi-open-in-new</v-icon
+                  ></v-btn
                 >
               </v-row>
             </v-card-actions>

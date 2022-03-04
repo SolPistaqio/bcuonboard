@@ -33,6 +33,7 @@
               </v-col>
             </v-row>
           </v-radio-group>
+          <v-divider v-if="marketVisited"></v-divider>
           <div v-if="kind || marketVisited">
             <v-card-title v-if="kind && !marketVisited"
               >You chose a {{ kind.value }}! {{ goodVibe }} Now, let’s talk
@@ -44,7 +45,7 @@
                   <v-radio
                     v-for="strategy in strategies"
                     :key="strategy.name"
-                    :label="strategy.info"
+                    :label="marketVisited ? strategy.short : strategy.info"
                     :value="strategy.value"
                     required
                   ></v-radio>
@@ -77,6 +78,7 @@
               "
             >
               Pick my first pet
+              <v-icon small class="mt-n4 mx-auto"> mdi-open-in-new</v-icon>
             </v-btn>
             <div v-if="marketVisited">
               <v-btn
@@ -85,8 +87,13 @@
                 target="_blank"
                 color="primary"
                 :disabled="!kind || !strategy"
+                @click="
+                  kind = null;
+                  strategy = null;
+                "
               >
                 Pick my next pet
+                <v-icon small class="mt-n4 mx-auto"> mdi-open-in-new</v-icon>
               </v-btn>
 
               <v-btn class="pa-5" @click="toFinalStep" color="primary">
@@ -101,7 +108,6 @@
           </v-row>
         </v-card-subtitle>
       </div>
-      <!-- Warn about what happens next -->
     </v-card>
   </v-container>
 </template>

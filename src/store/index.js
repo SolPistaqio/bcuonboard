@@ -51,26 +51,31 @@ export default new Vuex.Store({
       {
         name: "basic",
         info: "I want to get a basic pet to explore the game",
+        short: "Basic",
         value: "&sortBy=Price&orderBy=Asc",
       },
       {
         name: "strong",
         info: "I want the best warrior I can get",
+        short: "Premium",
         value: "Noble",
       },
       {
         name: "collectible",
         info: "I want a unique collectible pet",
+        short: "Unique collectible",
         value: "pets_unique",
       },
       {
         name: "tribute",
         info: "I want a pet inspired by pop culture",
+        short: "Pop culture tribute",
         value: "&rarity=Fancy",
       },
       {
         name: "random",
         info: "I don't have anything specific in mind",
+        short: "Random",
         value: "&sortBy=AdventureCooldown",
       },
     ],
@@ -158,6 +163,43 @@ export default new Vuex.Store({
           breeding: 1,
           transactions: 1,
         },
+      },
+    ],
+    sm: [
+      {
+        icon: "mdi-discord",
+        id: "Discord",
+        url: "https://discord.com/invite/C6KCEU7",
+      },
+      // {
+      //   icon: "mdi-telegram-fill",
+      //   id: "Telegram",
+      //   url: "https://t.me/blockchaincutiesinfo",
+      // },
+      {
+        icon: "mdi-twitter",
+        id: "Twitter",
+        url: "https://twitter.com/BlockchainCutie",
+      },
+      // {
+      //   icon: "mdi-size-m",
+      //   id: "Medium",
+      //   url: "https://medium.com/blockchain-cuties",
+      // },
+      {
+        icon: "mdi-reddit",
+        id: "Reddit",
+        url: "https://www.reddit.com/user/blockchaincuties/",
+      },
+      {
+        icon: "mdi-facebook",
+        id: "Facebook",
+        url: "https://www.facebook.com/blockchaincuties/",
+      },
+      {
+        icon: "mdi-wikipedia",
+        id: "Wiki",
+        url: "https://blockchain-cuties.fandom.com/wiki/Blockchain_Cuties_Wiki",
       },
     ],
   },
