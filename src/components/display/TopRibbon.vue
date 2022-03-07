@@ -2,7 +2,10 @@
   <v-container>
     <v-row>
       <v-col>
-        <LOGO />
+        <LOGO v-if="!isMobile" />
+        <LOGOmobile v-else />
+      </v-col>
+      <v-col>
         <div class="float-right">
           <span v-for="media in sm" :key="media.id">
             <v-tooltip bottom>
@@ -13,11 +16,11 @@
                   tile
                   :href="media.url"
                   target="_blank"
-                  class="ma-3"
+                  :class="isMobile ? 'ma-1 mt-2' : 'ma-3'"
                   v-bind="attrs"
                   v-on="on"
                   color="white"
-                  ><v-icon large>{{ media.icon }}</v-icon></v-btn
+                  ><v-icon medium>{{ media.icon }}</v-icon></v-btn
                 >
               </template>
               <span>{{ media.id }}</span>
@@ -30,13 +33,15 @@
 </template>
 
 <script>
+import { viewDetector } from "/src/mixins/viewDetector.js";
 import LOGO from "../icons/LOGO.vue";
-
 import { mapState } from "vuex";
+import LOGOmobile from "../icons/LOGOmobile.vue";
 
 export default {
-  components: { LOGO },
+  components: { LOGO, LOGOmobile },
   computed: mapState(["sm"]),
+  mixins: [viewDetector],
 };
 </script>
 

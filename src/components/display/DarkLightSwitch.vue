@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <span class="float-right">
+    <span class="float-right mt-n5 mb-n10">
       <v-tooltip v-if="!$vuetify.theme.dark" bottom>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" color="info" x-small fab @click="darkMode">

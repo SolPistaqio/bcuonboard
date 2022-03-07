@@ -4,7 +4,7 @@
       <v-card-title> Time to set up your player profile! </v-card-title>
       <v-card-text>
         <v-row>
-          <v-col cols="6">
+          <v-col :cols="isMobile ? '12' : '6'">
             <ol>
               <li>Navigate to BCU login page</li>
               <li>
@@ -29,9 +29,12 @@
               </v-row>
             </v-card-actions>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="6" v-if="!isMobile">
             <v-img src="/pictures/login.gif" contain></v-img>
           </v-col>
+        </v-row>
+        <v-row v-if="isMobile">
+          <v-img src="/pictures/login.gif" contain></v-img>
         </v-row>
       </v-card-text>
     </v-card>
@@ -73,7 +76,9 @@
 </template>
 
 <script>
+import { viewDetector } from "/src/mixins/viewDetector.js";
 export default {
+  mixins: [viewDetector],
   data: () => ({
     loggedIn: false,
     loginConfirmed: false,

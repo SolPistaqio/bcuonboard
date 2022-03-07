@@ -7,7 +7,7 @@
         coins. When ready, return to this page.
       </v-card-subtitle>
       <v-card-actions>
-        <v-row justify-space-around no-gutters>
+        <v-row v-if="!isMobile" justify-space-around no-gutters>
           <v-col
             cols="4"
             v-for="blockchain in blockchains"
@@ -23,18 +23,35 @@
             ></blockchain-card>
           </v-col>
         </v-row>
+
+        <v-row v-else>
+          <v-carousel hide-delimiters v-model="model">
+            <v-carousel-item
+              v-for="blockchain in blockchains"
+              v-bind:key="blockchain.name"
+            >
+              <blockchain-card
+                :blockchain="blockchain"
+                @click.native="
+                  chosenBlockchain = blockchain;
+                  userMadeAChoice = true;
+                "
+              ></blockchain-card>
+            </v-carousel-item>
+          </v-carousel>
+        </v-row>
       </v-card-actions>
     </v-card>
 
     <v-card v-else class="fill-height" flat>
       <v-row justify-space-around no-gutters>
-        <v-col cols="6">
+        <v-col v-if="!isMobile" cols="6">
           <blockchain-card
             :blockchain="chosenBlockchain"
             nonActive
           ></blockchain-card>
         </v-col>
-        <v-col cols="6" class="d-flex align-center">
+        <v-col :cols="isMobile ? '12' : '6'" class="d-flex align-center">
           <v-card flat>
             <v-card-text>
               <h2>Welcome to {{ chosenBlockchain.name }} team!</h2>
@@ -76,6 +93,7 @@
 <script>
 import BlockchainCard from "../display/BlockchainCard.vue";
 import { mapState } from "vuex";
+import { viewDetector } from "/src/mixins/viewDetector.js";
 
 export default {
   name: "Blockchains",
@@ -87,8 +105,10 @@ export default {
     chosenBlockchain: {},
     userMadeAChoice: false,
     walletInstalled: false,
+    model: 0,
   }),
   computed: mapState(["blockchains"]),
+  mixins: [viewDetector],
   methods: {
     finishBlockchainChioce() {
       this.$store.commit("updatechosenBlockchain", this.chosenBlockchain.name);
