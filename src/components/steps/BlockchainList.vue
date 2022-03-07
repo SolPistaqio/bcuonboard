@@ -1,33 +1,32 @@
 <template>
-  <v-container class="fill-height">
-    <template v-if="userMadeAChoice === false">
-      <v-card flat>
-        <v-card-title> Pick your blockchain </v-card-title>
-        <v-card-subtitle>
-          Click on the blockchain and install a wallet to hold your Cuties and
-          coins. When ready, return to this page.
-        </v-card-subtitle>
-        <v-card-actions>
-          <v-row justify-space-around no-gutters>
-            <v-col
-              cols="4"
-              v-for="blockchain in blockchains"
-              v-bind:key="blockchain.name"
-              class="flex-wrap"
-            >
-              <blockchain-card
-                :blockchain="blockchain"
-                @click.native="
-                  chosenBlockchain = blockchain;
-                  userMadeAChoice = true;
-                "
-              ></blockchain-card>
-            </v-col>
-          </v-row>
-        </v-card-actions>
-      </v-card>
-    </template>
-    <template v-else>
+  <v-container justify="center">
+    <v-card v-if="userMadeAChoice === false" class="fill-height" flat>
+      <v-card-title> Pick your blockchain </v-card-title>
+      <v-card-subtitle>
+        Click on the blockchain and install a wallet to hold your Cuties and
+        coins. When ready, return to this page.
+      </v-card-subtitle>
+      <v-card-actions>
+        <v-row justify-space-around no-gutters>
+          <v-col
+            cols="4"
+            v-for="blockchain in blockchains"
+            v-bind:key="blockchain.name"
+            class="flex-wrap"
+          >
+            <blockchain-card
+              :blockchain="blockchain"
+              @click.native="
+                chosenBlockchain = blockchain;
+                userMadeAChoice = true;
+              "
+            ></blockchain-card>
+          </v-col>
+        </v-row>
+      </v-card-actions>
+    </v-card>
+
+    <v-card v-else class="fill-height" flat>
       <v-row justify-space-around no-gutters>
         <v-col cols="6">
           <blockchain-card
@@ -70,7 +69,7 @@
           </v-card>
         </v-col>
       </v-row>
-    </template>
+    </v-card>
   </v-container>
 </template>
 

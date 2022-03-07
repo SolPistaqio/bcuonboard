@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height">
+  <v-container class="fill-height justify-center">
     <v-stepper v-model="model">
       <v-stepper-header>
         <v-stepper-step
