@@ -1,6 +1,6 @@
 <template>
   <v-container justify="center">
-    <v-card class="fill-height">
+    <v-card class="fill-height" flat>
       <v-card-title class="pa-10">
         <h1 v-if="!isMobile" style="word-break: normal">
           Welcome to Blockchain Cuties Universe Onboarding!
@@ -19,7 +19,7 @@
             >
               My name is Kote, and I will be your guide.
             </p>
-
+            <!-- Desktop layout  -->
             <div v-if="!isMobile">
               <p>Today we will:</p>
               <ul>
@@ -34,6 +34,7 @@
           <v-img class="float-end" src="/pictures/kote.png" contain></v-img>
         </v-col>
       </v-row>
+      <!-- Mobile layout  -->
       <v-row v-if="isMobile">
         <v-col>
           <v-card-text>

@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height" justify="center">
-    <v-card v-if="!loggedIn">
+    <v-card v-if="!loggedIn" flat>
       <v-card-title> Time to set up your player profile! </v-card-title>
       <v-card-text>
         <v-row>

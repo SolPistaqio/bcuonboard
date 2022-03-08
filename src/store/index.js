@@ -84,7 +84,8 @@ export default new Vuex.Store({
         name: "EOS",
         desktopLink: "https://getwombat.io",
         mobileLink: "https://getwombat.io",
-        walletName: "Wombat Wallet",
+        walletNameDesktop: "Wombat Wallet",
+        walletNameMobile: "Wombat Wallet",
         logo: "EOSicon",
         properties: {
           nfts: "160K+",
@@ -98,7 +99,8 @@ export default new Vuex.Store({
         name: "TRON",
         desktopLink: "https://www.tronlink.org",
         mobileLink: "https://www.tronlink.org",
-        walletName: "TRON Link Wallet",
+        walletNameDesktop: "TRON Link Wallet",
+        walletNameMobile: "TRON Link Wallet",
         logo: "TRONicon",
         properties: {
           nfts: "190K+",
@@ -113,7 +115,8 @@ export default new Vuex.Store({
         desktopLink: "https://o3.network/#/wallet",
         mobileLink: "https://o3.network/#/wallet",
         logo: "NEOicon",
-        walletName: "O3 Wallet",
+        walletNameDesktop: "O3 Wallet",
+        walletNameMobile: "O3 Wallet",
         properties: {
           nfts: "20K+",
           nftMarket: 2,
@@ -127,7 +130,8 @@ export default new Vuex.Store({
         desktopLink: "https://metamask.io",
         mobileLink: "https://trustwallet.com",
         logo: "MATICicon",
-        walletName: "Metamask Wallet",
+        walletNameDesktop: "Metamask Wallet",
+        walletNameMobile: "Trustwallet",
         properties: {
           nfts: "8K+",
           nftMarket: 3,
@@ -141,7 +145,8 @@ export default new Vuex.Store({
         desktopLink: "https://metamask.io",
         mobileLink: "https://www.huobiwallet.io/en",
         logo: "HECOicon",
-        walletName: "Metamask Wallet",
+        walletNameDesktop: "Metamask Wallet",
+        walletNameMobile: "Huobi Wallet",
         properties: {
           nfts: "10K+",
           nftMarket: 1,
@@ -155,7 +160,8 @@ export default new Vuex.Store({
         desktopLink: "https://metamask.io",
         mobileLink: "https://trustwallet.com",
         logo: "ETHicon",
-        walletName: "Metamask Wallet",
+        walletNameDesktop: "Metamask Wallet",
+        walletNameMobile: "Metamask Wallet",
         properties: {
           nfts: "130K+",
           nftMarket: 1,

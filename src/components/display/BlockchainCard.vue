@@ -3,7 +3,7 @@
     class="ma-2"
     :hover="nonActive ? false : true"
     rounded
-    :href="nonActive ? undefined : blockchain.desktopLink"
+    :href="link"
     :target="nonActive ? undefined : '_blank'"
   >
     <v-card-title>
@@ -13,7 +13,9 @@
       {{ blockchain.name }}
     </v-card-title>
     <v-card-subtitle>
-      {{ blockchain.walletName }}
+      {{
+        isMobile ? blockchain.walletNameMobile : blockchain.walletNameDesktop
+      }}
       <v-icon v-if="!nonActive" small class="mt-n4 mx-auto">
         mdi-open-in-new</v-icon
       >
@@ -80,8 +82,10 @@ import ETHicon from "/src/components/icons/ETH.vue";
 import NEOicon from "/src/components/icons/NEO.vue";
 import HECOicon from "/src/components/icons/HECO.vue";
 import MATICicon from "/src/components/icons/MATIC.vue";
+import { viewDetector } from "/src/mixins/viewDetector.js";
 
 export default {
+  mixins: [viewDetector],
   name: "BlockchainCard",
   props: {
     blockchain: Object,
@@ -94,6 +98,17 @@ export default {
     NEOicon,
     HECOicon,
     MATICicon,
+  },
+  computed: {
+    link() {
+      if (this.nonActive) {
+        return undefined;
+      } else if (this.isMobile) {
+        return this.blockchain.mobileLink;
+      } else {
+        return this.blockchain.desktopLink;
+      }
+    },
   },
 };
 </script>

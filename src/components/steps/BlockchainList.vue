@@ -7,6 +7,7 @@
         coins. When ready, return to this page.
       </v-card-subtitle>
       <v-card-actions>
+        <!-- Desktop layout  -->
         <v-row v-if="!isMobile" justify-space-around no-gutters>
           <v-col
             cols="4"
@@ -23,7 +24,7 @@
             ></blockchain-card>
           </v-col>
         </v-row>
-
+        <!-- Mobile layout  -->
         <v-row v-else>
           <v-carousel hide-delimiters v-model="model">
             <v-carousel-item
@@ -62,7 +63,11 @@
               </p>
 
               <v-checkbox
-                :label="'I have installed ' + chosenBlockchain.walletName"
+                :label="
+                  isMobile
+                    ? 'I have installed ' + chosenBlockchain.walletNameMobile
+                    : 'I have installed ' + chosenBlockchain.walletNameDesktop
+                "
                 v-model="walletInstalled"
               ></v-checkbox>
             </v-card-text>

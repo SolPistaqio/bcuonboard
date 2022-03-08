@@ -6,7 +6,8 @@
       <v-card-text>
         <v-form>
           <v-radio-group v-model="kind">
-            <v-row>
+            <!-- Desktop layout  -->
+            <v-row v-if="!isMobile">
               <v-col cols="6" v-for="pet in petKinds" :key="pet.value">
                 <v-radio :value="pet" required>
                   <template v-slot:label>
@@ -32,15 +33,45 @@
                 </v-radio>
               </v-col>
             </v-row>
+
+            <!-- Mobile layout  -->
+            <v-radio
+              v-else
+              v-for="pet in petKinds"
+              :key="pet.value"
+              :label="pet.name + ' - ' + pet.name"
+              :value="pet"
+            >
+              <template v-slot:label>
+                <v-row class="align-center pr-n5">
+                  <v-col cols="3" class="mr-n5">
+                    <v-img
+                      :src="'/pictures/' + pet.value + '.png'"
+                      height="30"
+                      width="30"
+                      aspect-ratio="1"
+                      contain
+                    ></v-img>
+                  </v-col>
+                  <v-col cols="9">
+                    <span class="font-weight-bold">{{ pet.name }}</span>
+                    -
+                    {{ pet.info }}
+                  </v-col>
+                </v-row>
+              </template>
+            </v-radio>
           </v-radio-group>
           <v-divider v-if="marketVisited"></v-divider>
           <div v-if="kind || marketVisited">
-            <v-card-title v-if="kind && !marketVisited"
+            <v-card-title
+              v-if="kind && !marketVisited"
+              style="word-break: normal"
               >You chose a {{ kind.value }}! {{ goodVibe }} Now, let’s talk
               about your strategy.</v-card-title
             >
             <v-row>
-              <v-col cols="6">
+              <v-col :cols="isMobile ? '12' : '6'">
                 <v-radio-group v-model="strategy">
                   <v-radio
                     v-for="strategy in strategies"
@@ -51,7 +82,7 @@
                   ></v-radio>
                 </v-radio-group>
               </v-col>
-              <v-col cols="6">
+              <v-col v-if="!isMobile" cols="6">
                 <v-img
                   src="/pictures/think.png"
                   max-height="300"
@@ -82,7 +113,7 @@
             </v-btn>
             <div v-if="marketVisited">
               <v-btn
-                class="pa-5 mr-10"
+                :class="isMobile ? 'mr-3' : 'pa-5 mr-10'"
                 :href="link"
                 target="_blank"
                 color="primary"
@@ -92,11 +123,16 @@
                   strategy = null;
                 "
               >
-                Pick my next pet
+                {{ isMobile ? "Pick next pet" : "Pick my next pet" }}
+
                 <v-icon small class="mt-n4 mx-auto"> mdi-open-in-new</v-icon>
               </v-btn>
 
-              <v-btn class="pa-5" @click="toFinalStep" color="primary">
+              <v-btn
+                :class="isMobile ? '' : 'pa-5'"
+                @click="toFinalStep"
+                color="primary"
+              >
                 Continue
               </v-btn>
             </div>
@@ -114,8 +150,10 @@
 
 <script>
 import { mapState } from "vuex";
+import { viewDetector } from "/src/mixins/viewDetector.js";
 
 export default {
+  mixins: [viewDetector],
   data: () => ({
     kind: null,
     strategy: null,

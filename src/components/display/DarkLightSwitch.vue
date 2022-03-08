@@ -25,9 +25,12 @@
 <script>
 export default {
   name: "DarkLightSwitch",
-  data: () => ({
-    fab: false,
-  }),
+  data: () => ({}),
+  mounted() {
+    this.$vuetify.theme.dark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+  },
   methods: {
     darkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;

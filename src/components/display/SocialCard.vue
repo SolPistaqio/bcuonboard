@@ -12,7 +12,7 @@
               tile
               :href="media.url"
               target="_blank"
-              class="ma-3"
+              :class="isMobile ? 'ma-1 mt-2' : 'ma-3'"
               v-bind="attrs"
               v-on="on"
               ><v-icon large>{{ media.icon }}</v-icon></v-btn
@@ -26,9 +26,11 @@
 </template>
 
 <script>
+import { viewDetector } from "/src/mixins/viewDetector.js";
 import { mapState } from "vuex";
 export default {
   name: "SocialCard",
+  mixins: [viewDetector],
   computed: mapState(["sm"]),
 };
 </script>

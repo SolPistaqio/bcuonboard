@@ -1,16 +1,12 @@
 <template>
   <v-container class="fill-height">
-    <!-- 
-    Need a play now button
-    
-    
-     -->
-
     <v-card flat>
-      <v-card-title>
+      <v-card-title style="word-break: normal">
         Congratulations on starting your Cutie collection!
       </v-card-title>
-      <v-row>
+
+      <!-- Desktop layout  -->
+      <v-row v-if="!isMobile">
         <v-col cols="6">
           <v-card-text>
             <p>Here’s what you can do with your first pet/s:</p>
@@ -37,6 +33,29 @@
           <v-img src="/pictures/final.png" max-height="300" contain></v-img
         ></v-col>
       </v-row>
+      <!-- Mobile layout  -->
+      <v-row v-else>
+        <v-col
+          ><v-img src="/pictures/final.png" max-height="200" contain></v-img>
+          <p>Here’s what you can do with your first pet/s:</p>
+          <ActionCard
+            v-for="action in actions"
+            :key="action.text"
+            :action="action"
+          />
+          <p class="mt-5">
+            Now you have an account in one of the most advanced Play-To-Earn
+            games in the industry.
+          </p>
+          <p>
+            There's still a lot to figure out before you find your strategy. And
+            you don't have to do it alone.
+          </p>
+          <v-card-actions>
+            <SubscriptionCard />
+          </v-card-actions>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <v-card-actions>
@@ -52,6 +71,7 @@
 import ActionCard from "../display/ActionCard.vue";
 import SubscriptionCard from "../display/SubscriptionCard.vue";
 import SocialCard from "../display/SocialCard.vue";
+import { viewDetector } from "/src/mixins/viewDetector.js";
 
 export default {
   components: {
@@ -59,6 +79,7 @@ export default {
     SubscriptionCard,
     SocialCard,
   },
+  mixins: [viewDetector],
   data: () => ({
     actions: [
       {

@@ -15,7 +15,8 @@
         Subscribe for daily tips to help you along the way!
       </h3>
       <v-form ref="form" v-model="valid" lazy-validation>
-        <v-row class="pt-3">
+        <!-- Desktop layout  -->
+        <v-row v-if="!isMobile" class="pt-3">
           <v-col cols="8">
             <v-text-field
               prepend-inner-icon="mdi-email"
@@ -34,13 +35,32 @@
             <v-btn @click="subscribe()" color="primary" large>Subscribe</v-btn>
           </v-col>
         </v-row>
+        <!-- Mobile layout  -->
+        <v-row v-else class="pt-3" no-gutters>
+          <v-col>
+            <v-text-field
+              prepend-inner-icon="mdi-email"
+              v-model="email"
+              type="email"
+              :rules="emailRules"
+              placeholder="email"
+              hint="No spam. Unsubscribe at any time."
+              persistent-hint
+              outlined
+              required
+            >
+            </v-text-field>
+
+            <v-btn @click="subscribe()" color="primary" medium>Subscribe</v-btn>
+          </v-col>
+        </v-row>
       </v-form>
     </v-row>
     <v-row v-else>
       <v-col>
         <h3 class="text-bold mb-3">Thank you for subscribing!</h3>
         <p>Check your mailbox to confirm your subscription.</p>
-        <p>
+        <p v-if="!isMobile">
           If you can't find the confirmation email, check your junk folder and
           add social@blockchaincuties.com to your contacts.
         </p>
@@ -50,7 +70,9 @@
 </template>
 
 <script>
+import { viewDetector } from "/src/mixins/viewDetector.js";
 export default {
+  mixins: [viewDetector],
   data: () => ({
     emailRules: [
       (v) =>
