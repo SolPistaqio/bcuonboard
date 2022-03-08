@@ -94,7 +94,8 @@
         </v-form>
       </v-card-text>
       <div v-if="(strategy && kind) || marketVisited">
-        <v-card-actions>
+        <!-- Desktop layout  -->
+        <v-card-actions v-if="!isMobile">
           <v-row justify="center">
             <v-btn
               v-if="!marketVisited"
@@ -108,12 +109,12 @@
                 strategy = null;
               "
             >
-              Pick my first pet
+              Buy my first pet
               <v-icon small class="mt-n4 mx-auto"> mdi-open-in-new</v-icon>
             </v-btn>
             <div v-if="marketVisited">
               <v-btn
-                :class="isMobile ? 'mr-3' : 'pa-5 mr-10'"
+                class="pa-5 mr-10"
                 :href="link"
                 target="_blank"
                 color="primary"
@@ -123,21 +124,71 @@
                   strategy = null;
                 "
               >
-                {{ isMobile ? "Pick next pet" : "Pick my next pet" }}
+                Buy another pet
 
                 <v-icon small class="mt-n4 mx-auto"> mdi-open-in-new</v-icon>
               </v-btn>
 
-              <v-btn
-                :class="isMobile ? '' : 'pa-5'"
-                @click="toFinalStep"
-                color="primary"
-              >
+              <v-btn class="pa-5" @click="toFinalStep" color="primary">
                 Continue
               </v-btn>
             </div>
           </v-row>
         </v-card-actions>
+
+        <!-- Mobile layout  -->
+        <v-card-text v-if="isMobile"
+          >Paste this link into your wallet app to acces Cutie NFT
+          market</v-card-text
+        >
+        <v-card-actions v-if="isMobile">
+          <v-row>
+            <v-col cols="7">
+              <v-text-field
+                outlined
+                disabled
+                :value="link"
+                hint="Link to BCU NFT market"
+                persistent-hint
+                type="text"
+                ref="link"
+                >{{ link }}
+              </v-text-field>
+            </v-col>
+            <v-col cols="5">
+              <v-btn
+                class="mt-3"
+                @click="
+                  copyLink();
+                  marketVisited = true;
+                "
+                color="primary"
+                :disabled="!kind || !strategy"
+              >
+                Copy Link</v-btn
+              >
+            </v-col>
+          </v-row>
+        </v-card-actions>
+        <div v-if="linkCopied">
+          <v-divider></v-divider>
+          <v-card-actions class="justify-center">
+            <v-btn
+              class="mr-3"
+              color="primary"
+              @click="
+                kind = null;
+                strategy = null;
+              "
+            >
+              Buy another pet
+            </v-btn>
+
+            <v-btn class="pa-5" @click="toFinalStep" color="primary">
+              Continue
+            </v-btn>
+          </v-card-actions>
+        </div>
         <v-card-subtitle v-if="!marketVisited">
           <v-row justify="center" class="pa-3">
             Return to this page to find out what you can do next
@@ -145,6 +196,15 @@
         </v-card-subtitle>
       </div>
     </v-card>
+    <v-snackbar v-model="snackbar" :timeout="messageTimeout" color="success">
+      {{ successText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn icon v-bind="attrs" @click="snackbar = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -154,11 +214,19 @@ import { viewDetector } from "/src/mixins/viewDetector.js";
 
 export default {
   mixins: [viewDetector],
+
+  mounted() {
+    this.$store.commit("nextStep", 3);
+  },
   data: () => ({
     kind: null,
     strategy: null,
     goodVibe: null,
     marketVisited: false,
+    successText: "Link copied to clipboard",
+    snackbar: false,
+    messageTimeout: 2000,
+    linkCopied: false,
   }),
   computed: {
     link: function () {
@@ -213,8 +281,15 @@ export default {
       const randomNumber = Math.floor(Math.random() * goodVibes.length);
       return goodVibes[randomNumber];
     },
+    copyLink() {
+      let textToCopy = this.$refs.link.$el.querySelector("input");
+      textToCopy.select();
+      document.execCommand("copy");
+      this.snackbar = true;
+      this.linkCopied = true;
+    },
     toFinalStep() {
-      this.$store.commit("nextStep");
+      this.$store.commit("nextStep", 4);
     },
   },
 };

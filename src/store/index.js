@@ -210,8 +210,8 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
-    nextStep(state) {
-      state.currentStep++;
+    nextStep(state, step) {
+      state.currentStep = step;
     },
     updatechosenBlockchain(state, blockchain) {
       state.chosenBlockchain = blockchain;

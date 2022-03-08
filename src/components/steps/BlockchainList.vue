@@ -114,14 +114,24 @@ export default {
   }),
   computed: mapState(["blockchains"]),
   mixins: [viewDetector],
+  mounted() {
+    this.$store.commit("nextStep", 1);
+  },
   methods: {
     finishBlockchainChioce() {
       this.$store.commit("updatechosenBlockchain", this.chosenBlockchain.name);
-      this.$store.commit(
-        "updatechosenWallet",
-        this.chosenBlockchain.walletName
-      );
-      this.$store.commit("nextStep");
+      if (this.isMobile) {
+        this.$store.commit(
+          "updatechosenWallet",
+          this.chosenBlockchain.walletNameMobile
+        );
+      } else {
+        this.$store.commit(
+          "updatechosenWallet",
+          this.chosenBlockchain.walletNameDesktop
+        );
+      }
+      this.$store.commit("nextStep", 2);
     },
   },
 };
