@@ -15,11 +15,13 @@ export default new Vuex.Store({
       {
         name: "Pick your blockchain",
         order: 1,
+        mOrder: 2,
         path: "/journey/blockchain",
       },
       {
         name: "Set up player profile",
         order: 2,
+        mOrder: 1,
         path: "/journey/profile",
       },
       {
@@ -83,9 +85,9 @@ export default new Vuex.Store({
       {
         name: "EOS",
         desktopLink: "https://getwombat.io",
-        mobileLink: "https://getwombat.io",
+
         walletNameDesktop: "Wombat Wallet",
-        walletNameMobile: "Wombat Wallet",
+
         logo: "EOSicon",
         properties: {
           nfts: "160K+",
@@ -98,9 +100,9 @@ export default new Vuex.Store({
       {
         name: "TRON",
         desktopLink: "https://www.tronlink.org",
-        mobileLink: "https://www.tronlink.org",
+
         walletNameDesktop: "TRON Link Wallet",
-        walletNameMobile: "TRON Link Wallet",
+
         logo: "TRONicon",
         properties: {
           nfts: "190K+",
@@ -113,10 +115,10 @@ export default new Vuex.Store({
       {
         name: "NEO",
         desktopLink: "https://o3.network/#/wallet",
-        mobileLink: "https://o3.network/#/wallet",
+
         logo: "NEOicon",
         walletNameDesktop: "O3 Wallet",
-        walletNameMobile: "O3 Wallet",
+
         properties: {
           nfts: "20K+",
           nftMarket: 2,
@@ -128,10 +130,10 @@ export default new Vuex.Store({
       {
         name: "Polygon",
         desktopLink: "https://metamask.io",
-        mobileLink: "https://trustwallet.com",
+
         logo: "MATICicon",
         walletNameDesktop: "Metamask Wallet",
-        walletNameMobile: "Trustwallet",
+
         properties: {
           nfts: "8K+",
           nftMarket: 3,
@@ -143,10 +145,10 @@ export default new Vuex.Store({
       {
         name: "HECO",
         desktopLink: "https://metamask.io",
-        mobileLink: "https://www.huobiwallet.io/en",
+
         logo: "HECOicon",
         walletNameDesktop: "Metamask Wallet",
-        walletNameMobile: "Huobi Wallet",
+
         properties: {
           nfts: "10K+",
           nftMarket: 1,
@@ -158,10 +160,10 @@ export default new Vuex.Store({
       {
         name: "Ethereum",
         desktopLink: "https://metamask.io",
-        mobileLink: "https://trustwallet.com",
+
         logo: "ETHicon",
         walletNameDesktop: "Metamask Wallet",
-        walletNameMobile: "Metamask Wallet",
+
         properties: {
           nfts: "130K+",
           nftMarket: 1,

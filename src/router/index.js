@@ -46,7 +46,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path != "/" && to.path != "/journey/blockchain") {
+  if (
+    to.path != "/" &&
+    to.path != "/journey/blockchain" &&
+    to.path != "/journey/profile"
+  ) {
     const destinationStep = store.state.steps.filter(
       (step) => step.path === to.path
     )[0];

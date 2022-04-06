@@ -38,41 +38,25 @@
       </v-card-text>
       <!-- Mobile layout  -->
       <v-card-text v-else>
-        1. Paste the link below to your wallet app
-        <v-card-actions>
-          <v-row>
-            <v-col cols="7">
-              <v-text-field
-                outlined
-                disabled
-                value="https://blockchaincuties.com/login"
-                hint="Link to BCU"
-                persistent-hint
-                type="text"
-                ref="link"
-                >https://blockchaincuties.com/login
-              </v-text-field>
-            </v-col>
-            <v-col cols="5">
-              <v-btn class="mt-3" @click="copyLink()" color="primary">
-                Copy Link</v-btn
-              >
-            </v-col>
-          </v-row>
-        </v-card-actions>
-        <ol start="2">
-          <li>
-            Find {{ this.$store.state.chosenBlockchain }} blockchain on the left
-          </li>
-          <li>Click on {{ this.$store.state.chosenWallet }}</li>
+        <ol>
+          <li>Navigate to BCU login page</li>
+          <li>Sign Up</li>
+          <li>Fill the form and confirm your email</li>
           <li>Come back to this page to choose your first pet</li>
         </ol>
 
-        <v-card-actions>
-          <v-btn color="primary" @click="loggedIn = true">Continue</v-btn>
-        </v-card-actions>
+        <v-row class="pa-5">
+          <v-btn
+            color="primary"
+            href="https://blockchaincuties.com/login"
+            target="_blank"
+            @click="loggedIn = true"
+            >Sign Up Now
+            <v-icon small class="mt-n4 mx-auto"> mdi-open-in-new</v-icon></v-btn
+          >
+        </v-row>
 
-        <v-img class="pt-4" src="/pictures/login.gif" contain></v-img>
+        <v-img class="pt-4" src="/pictures/signup.gif" contain></v-img>
       </v-card-text>
     </v-card>
     <v-card v-else flat>
@@ -111,15 +95,6 @@
         </v-col>
       </v-row>
     </v-card>
-    <v-snackbar v-model="snackbar" timeout="2000" color="success">
-      Link copied to clipboard
-
-      <template v-slot:action="{ attrs }">
-        <v-btn icon v-bind="attrs" @click="snackbar = false">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </template>
-    </v-snackbar>
   </v-container>
 </template>
 
@@ -133,18 +108,16 @@ export default {
   data: () => ({
     loggedIn: false,
     loginConfirmed: false,
-    snackbar: false,
   }),
   methods: {
     finishProfileSetup() {
-      this.$store.commit("nextStep", 3);
-    },
-    copyLink() {
-      let textToCopy = this.$refs.link.$el.querySelector("input");
-      textToCopy.select();
-      document.execCommand("copy");
-      this.snackbar = true;
-      this.linkCopied = true;
+      if (this.isMobile) {
+        {
+          this.$store.commit("nextStep", 1);
+        }
+      } else {
+        this.$store.commit("nextStep", 3);
+      }
     },
   },
 };

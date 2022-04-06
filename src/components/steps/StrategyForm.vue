@@ -95,7 +95,7 @@
       </v-card-text>
       <div v-if="(strategy && kind) || marketVisited">
         <!-- Desktop layout  -->
-        <v-card-actions v-if="!isMobile">
+        <v-card-actions>
           <v-row justify="center">
             <v-btn
               v-if="!marketVisited"
@@ -136,59 +136,6 @@
           </v-row>
         </v-card-actions>
 
-        <!-- Mobile layout  -->
-        <v-card-text v-if="isMobile"
-          >Paste this link into your wallet app to acces Cutie NFT
-          market</v-card-text
-        >
-        <v-card-actions v-if="isMobile">
-          <v-row>
-            <v-col cols="7">
-              <v-text-field
-                outlined
-                disabled
-                :value="link"
-                hint="Link to BCU NFT market"
-                persistent-hint
-                type="text"
-                ref="link"
-                >{{ link }}
-              </v-text-field>
-            </v-col>
-            <v-col cols="5">
-              <v-btn
-                class="mt-3"
-                @click="
-                  copyLink();
-                  marketVisited = true;
-                "
-                color="primary"
-                :disabled="!kind || !strategy"
-              >
-                Copy Link</v-btn
-              >
-            </v-col>
-          </v-row>
-        </v-card-actions>
-        <div v-if="linkCopied">
-          <v-divider></v-divider>
-          <v-card-actions class="justify-center">
-            <v-btn
-              class="mr-3"
-              color="primary"
-              @click="
-                kind = null;
-                strategy = null;
-              "
-            >
-              Buy another pet
-            </v-btn>
-
-            <v-btn class="pa-5" @click="toFinalStep" color="primary">
-              Continue
-            </v-btn>
-          </v-card-actions>
-        </div>
         <v-card-subtitle v-if="!marketVisited">
           <v-row justify="center" class="pa-3">
             Return to this page to find out what you can do next
@@ -223,10 +170,6 @@ export default {
     strategy: null,
     goodVibe: null,
     marketVisited: false,
-    successText: "Link copied to clipboard",
-    snackbar: false,
-    messageTimeout: 2000,
-    linkCopied: false,
   }),
   computed: {
     link: function () {
@@ -281,13 +224,7 @@ export default {
       const randomNumber = Math.floor(Math.random() * goodVibes.length);
       return goodVibes[randomNumber];
     },
-    copyLink() {
-      let textToCopy = this.$refs.link.$el.querySelector("input");
-      textToCopy.select();
-      document.execCommand("copy");
-      this.snackbar = true;
-      this.linkCopied = true;
-    },
+
     toFinalStep() {
       this.$store.commit("nextStep", 4);
     },

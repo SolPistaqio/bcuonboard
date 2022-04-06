@@ -13,9 +13,7 @@
       {{ blockchain.name }}
     </v-card-title>
     <v-card-subtitle>
-      {{
-        isMobile ? blockchain.walletNameMobile : blockchain.walletNameDesktop
-      }}
+      {{ isMobile ? "BCU wallet" : blockchain.walletNameDesktop }}
       <v-icon v-if="!nonActive" small class="mt-n4 mx-auto">
         mdi-open-in-new</v-icon
       >
@@ -104,7 +102,7 @@ export default {
       if (this.nonActive) {
         return undefined;
       } else if (this.isMobile) {
-        return this.blockchain.mobileLink;
+        return "https://blockchaincuties.com/blockchain_wallets";
       } else {
         return this.blockchain.desktopLink;
       }

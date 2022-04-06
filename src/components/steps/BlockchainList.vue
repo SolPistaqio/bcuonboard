@@ -65,7 +65,9 @@
               <v-checkbox
                 :label="
                   isMobile
-                    ? 'I have installed ' + chosenBlockchain.walletNameMobile
+                    ? 'I have activated ' +
+                      chosenBlockchain.name +
+                      ' in my BCU wallet'
                     : 'I have installed ' + chosenBlockchain.walletNameDesktop
                 "
                 v-model="walletInstalled"
@@ -121,17 +123,20 @@ export default {
     finishBlockchainChioce() {
       this.$store.commit("updatechosenBlockchain", this.chosenBlockchain.name);
       if (this.isMobile) {
-        this.$store.commit(
-          "updatechosenWallet",
-          this.chosenBlockchain.walletNameMobile
-        );
+        this.$store.commit("updatechosenWallet", "BCU wallet");
       } else {
         this.$store.commit(
           "updatechosenWallet",
           this.chosenBlockchain.walletNameDesktop
         );
       }
-      this.$store.commit("nextStep", 2);
+      if (this.isMobile) {
+        {
+          this.$store.commit("nextStep", 3);
+        }
+      } else {
+        this.$store.commit("nextStep", 2);
+      }
     },
   },
 };
